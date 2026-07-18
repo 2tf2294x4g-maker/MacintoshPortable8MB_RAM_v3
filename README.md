@@ -185,7 +185,9 @@ With a full build (all 8 SRAMs), you should see **9 MB** in About This Macintosh
 
 ### Known bring-up note — speed after sleep
 
-The memory region above 4 MB defaults to slow DTACK mode after the CPU wakes from sleep, until the motherboard register at `$FC0200` is read. This is a Mac Portable hardware quirk, not a card bug. A small INIT that reads `$FC0200` on wake permanently fixes it. In normal use (no sleep) the card runs at full speed.
+The memory region above 4 MB defaults to slow DTACK mode after the CPU wakes from sleep, until the motherboard register at `$FC0200` is read. This is a Mac Portable hardware quirk, not a card bug. In normal use (no sleep) the card runs at full speed.
+
+A small INIT (`PortableDTACK`) that reads `$FC0200` on every wake is under development and is expected to permanently fix this. **Not yet tested on real hardware — use at your own risk.**
 
 ---
 
