@@ -5144,7 +5144,7 @@
 		)
 		(uuid "80965efc-b533-4f9f-8993-c32d5a76de4d")
 	)
-	(text "DESIGN NOTES — v3.0\n\nMEMORY MAP: 4 banks x 2MB (1Mx16 pairs) fill the expansion window\n0x100000–0x8FFFFF = 8MB (9MB system total on M5120). Banks straddle\neven-MB boundaries because the window starts at 1MB.\n\nBANKSEL (CPLD pin 33) = !A20 — selects which 1MB half of each 2MB\nbank is active; drives A19 (pin 18) on all SRAMs.\nChip A0–A18 = Mac A1–A19.\n\nWRITE ENABLES — DO NOT MERGE: /WE (pin 28) = low byte U2–U5,\ngated by /LDS. /WEH (pin 30) = high byte U6–U9, gated by /UDS.\nA common WE corrupts the partner byte on 68000 byte writes.\n\nMODEL JUMPER JP1: OPEN = M5120 non-backlit, all 4 banks active,\n8MB expansion = 9MB total. CLOSED = M5126 backlit, bank 3\n(0x700000–0x8FFFFF) gated off, 6MB expansion = 7MB total.\nAvoids SLOT_CS0 conflict on backlit models above 0x700000.\n\nBANK POPULATION: populate sequentially from bank 0 (U2+U6).\nGhost RAM prevention: R6–R21 (10K pull-downs on data bus, SRAM\nside of 74HC245) ensure empty banks return 0x0000 so Mac boot\nRAM sizing halts cleanly without ghost RAM detection.\n\nSTATUS LEDs (LED0–LED3): CPLD registered outputs (pins 35,37,38,39)\nthat latch ON when Mac boot probe first accesses each bank.\nPower-cycle clears. LED on = bank found and sized at boot.\n330R series resistors (R22–R25).\n\nCS2 (SRAM pin 40): active-high 2nd enable, tied to +5V (unused).\nDTACK: not driven by this card — the Portable's CPU GLU generates it.\nALL-5V DESIGN: no LDO. AS6C8008 are 2.7–5.5V parts."
+	(text "DESIGN NOTES — v3.0\n\nMEMORY MAP: 4 banks x 2MB (1Mx16 pairs) fill the expansion window\n0x100000–0x8FFFFF = 8MB (9MB system total on M5120). Banks straddle\neven-MB boundaries because the window starts at 1MB.\n\nBANKSEL (CPLD pin 33) = !A20 — selects which 1MB half of each 2MB\nbank is active; drives A19 (pin 18) on all SRAMs.\nChip A0–A18 = Mac A1–A19.\n\nWRITE ENABLES — DO NOT MERGE: /WE (pin 28) = low byte U2–U5,\ngated by /LDS. /WEH (pin 30) = high byte U6–U9, gated by /UDS.\nA common WE corrupts the partner byte on 68000 byte writes.\n\nMODEL JUMPER JP1: OPEN = M5120 non-backlit, all 4 banks active,\n8MB expansion = 9MB total. CLOSED = M5126 backlit, bank 3\n(0x700000–0x8FFFFF) gated off, 6MB expansion = 7MB total.\nAvoids SLOT_CS0 conflict on backlit models above 0x700000.\n\nBANK POPULATION: populate sequentially from bank 0 (U2+U6).\nGhost RAM prevention: R6–R21 (10K pull-downs on data bus, SRAM\nside of 74HC245) ensure empty banks return 0x0000 so Mac boot\nRAM sizing halts cleanly without ghost RAM detection.\n\nSTATUS LEDs (LED0–LED3): CPLD registered outputs (pins 35,42,43,44)\nthat latch ON when Mac boot probe first accesses each bank.\nPower-cycle clears. LED on = bank found and sized at boot.\n330R series resistors (R22–R25).\n\nCS2 (SRAM pin 40): active-high 2nd enable, tied to +5V (unused).\nDTACK: not driven by this card — the Portable's CPU GLU generates it.\nALL-5V DESIGN: no LDO. AS6C8008 are 2.7–5.5V parts."
 		(exclude_from_sim no)
 		(at 55 240 0)
 		(effects
@@ -5199,14 +5199,6 @@
 		(uuid "7c5e9c50-73b4-4030-8071-ae6e4a4419e5")
 	)
 	(no_connect
-		(at 220.98 69.85)
-		(uuid "0828b708-f271-48f1-ac75-cf28ee180895")
-	)
-	(no_connect
-		(at 220.98 67.31)
-		(uuid "10e8845b-7f5c-4b80-bcc5-dcf848c68426")
-	)
-	(no_connect
 		(at 215.9 266.7)
 		(uuid "13338423-9418-4e62-a8c5-c2a7a47e71c5")
 	)
@@ -5215,12 +5207,16 @@
 		(uuid "407f5d7b-e239-484e-b634-64130fbf50ce")
 	)
 	(no_connect
+		(at 220.98 80.01)
+		(uuid "49fe3921-0308-4af2-8126-276ff4cfe8fb")
+	)
+	(no_connect
 		(at 220.98 74.93)
 		(uuid "53ff884a-51d8-478a-920e-4fe6594c7a1e")
 	)
 	(no_connect
-		(at 220.98 72.39)
-		(uuid "89728ced-4189-4db5-99ec-99af447b8c31")
+		(at 220.98 77.47)
+		(uuid "8c158cd1-8038-451b-8f8f-5d7156aa5772")
 	)
 	(no_connect
 		(at 220.98 110.49)
@@ -5233,6 +5229,10 @@
 	(no_connect
 		(at 215.9 261.62)
 		(uuid "fa763555-373a-42ae-8b68-908ca6ed6bf2")
+	)
+	(no_connect
+		(at 220.98 82.55)
+		(uuid "fc2eb709-0a2b-4a11-b8bf-0d83434e64e1")
 	)
 	(wire
 		(pts
@@ -9144,16 +9144,6 @@
 		)
 		(uuid "3eda586b-7e7d-4f18-aa27-9b5ac1dce332")
 	)
-	(label "LED1"
-		(at 220.98 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3f33e3f4-431d-42ed-a590-c04044fdff31")
-	)
 	(label "A16"
 		(at 389.89 104.14 0)
 		(effects
@@ -9763,6 +9753,16 @@
 			(justify left bottom)
 		)
 		(uuid "69c747c9-007f-42e8-86f6-c26aa3c94e54")
+	)
+	(label "LED1"
+		(at 220.98 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6a2588bc-01d8-4761-a194-cce9aef66c5f")
 	)
 	(label "A6"
 		(at 389.89 78.74 0)
@@ -10464,16 +10464,6 @@
 		)
 		(uuid "99a0b0de-0b22-4861-9b51-df5aa6c9c7a0")
 	)
-	(label "LED3"
-		(at 220.98 77.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "99a31f0f-15eb-417b-9676-5e43fb260a06")
-	)
 	(label "SD9"
 		(at 426.72 193.04 0)
 		(effects
@@ -11044,6 +11034,16 @@
 		)
 		(uuid "bed3e7d1-2387-414a-a3ff-ea527d419435")
 	)
+	(label "LED3"
+		(at 220.98 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bfd5b700-9eb3-4f67-b4ed-c54533c47bb8")
+	)
 	(label "A3"
 		(at 389.89 195.58 0)
 		(effects
@@ -11224,6 +11224,16 @@
 		)
 		(uuid "c7dd1aa5-174c-4b27-9cc4-86aeca47efa5")
 	)
+	(label "LED2"
+		(at 220.98 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c7e1d14a-9eb3-4eeb-88a4-e6c203e067dc")
+	)
 	(label "TDO"
 		(at 226.06 92.71 0)
 		(effects
@@ -11303,16 +11313,6 @@
 			(justify left bottom)
 		)
 		(uuid "cc5e6864-ef8f-4597-998f-9870c1717074")
-	)
-	(label "LED2"
-		(at 220.98 80.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cd486c1e-f19d-44f0-bade-30a9b29ddec6")
 	)
 	(label "A10"
 		(at 389.89 213.36 0)

@@ -85,10 +85,12 @@ PIN 30 = !WEH     ; /* write enable, HIGH byte chips U6-U9 */
 PIN 33 = BANKSEL  ; /* bank-half select -> SRAM A19 (pin 18, all chips) */
 
 /* ---------- registered LED outputs (latch on first bank access at boot) -- */
+/* NOTE: pins 37/38/39/40 are dedicated input-only pins on ATF1502 TQFP-44  */
+/* and cannot be used as outputs. LED1/2/3 moved to Block A pins 42/43/44.  */
 PIN 35 = LED0     ; /* bank 0 status: green LED, latches on at boot probe   */
-PIN 37 = LED1     ; /* bank 1 status */
-PIN 38 = LED2     ; /* bank 2 status */
-PIN 39 = LED3     ; /* bank 3 status (gated by MODEL on M5126)              */
+PIN 42 = LED1     ; /* bank 1 status -- was pin 37 (dedicated input, invalid) */
+PIN 43 = LED2     ; /* bank 2 status -- was pin 38 (dedicated input, invalid) */
+PIN 44 = LED3     ; /* bank 3 status -- was pin 39 (dedicated input, invalid) */
 
 /* ---------- intermediate terms ---------- */
 page1 = !A23 & !A22 & !A21 &  A20 ;        /* 0x1xxxxx */
