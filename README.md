@@ -4,7 +4,8 @@ Expands a Macintosh Portable to **9 MB total** (1 MB onboard + 8 MB this card) �
 
 All-5V design using 1M×8 SRAM chips and an ATF1502ASL CPLD. Works with both the **M5120** (non-backlit) and **M5126** (backlit) Portable via the MODEL jumper. Banks are added sequentially — no jumpers needed as you populate.
 
-> **Status:** PCB ordered July 2026, awaiting build and validation.
+> ⚠️ **PRE-PRODUCTION — NOT TESTED**
+> This board has been designed and ordered but has not yet been assembled or validated on real hardware. Schematics, firmware, and Gerbers are provided as-is. Do not build for production use until hardware validation is complete.
 
 ---
 
