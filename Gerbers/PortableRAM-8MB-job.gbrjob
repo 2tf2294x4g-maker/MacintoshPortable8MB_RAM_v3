@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "9.0.8"
     },
-    "CreationDate": "2026-07-10T12:56:16-04:00"
+    "CreationDate": "2026-07-17T22:01:45-04:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "PortableRAM-8MB",
       "GUID": "506f7274-6162-46c6-9552-414d2d384d42",
-      "Revision": "2.0"
+      "Revision": "3.0"
     },
     "Size": {
       "X": 123.1,
