@@ -56,7 +56,7 @@ All-5V design using 1M×8 SRAM chips and an ATF1502ASL CPLD. Works with both the
 | C1–C14 | 14 | 100 nF | 0805 | X7R 50V ceramic bypass (one per IC) |
 | C15–C19 | 5 | 10 µF | 0805 | X5R 16V ceramic bulk |
 
-Full BOM: [PortableRAM-8MB-BOM.csv](PortableRAM-8MB-BOM.csv)
+Full BOM: [PortableRAM-8MB-v3-BOM.csv](PortableRAM-8MB-v3-BOM.csv)
 
 ---
 
@@ -102,7 +102,7 @@ PortableRAM.kicad_sym         — Custom symbol library
 PortableRAM.pretty/           — Custom footprint library
 Library.pretty/               — Additional footprints
 Gerbers/                      — Gerber + drill files (ready to order)
-Gerbers.zip                   — Same, zipped (upload directly to fab)
+PortableRAM-8MB-v3-Gerbers.zip — Same, zipped (upload directly to fab)
 firmware/
   PortableRAM8_v3.pld            — CUPL source (ATF1502ASL logic)
   PortableRAM8_v3.jed            — Compiled JEDEC fusemap
@@ -110,14 +110,14 @@ firmware/
   PortableRAM8_v3.fit            — WinCUPL fit report
   program.sh                  — One-command programming script (Tigard)
   BUILD.md                    — Firmware build instructions (WinCUPL + Wine)
-PortableRAM-8MB-BOM.csv
+PortableRAM-8MB-v3-BOM.csv
 ```
 
 ---
 
 ## Ordering the PCB
 
-Upload `Gerbers.zip` to your preferred fab (JLCPCB, PCBWay, OSHPark, etc.).
+Upload `PortableRAM-8MB-v3-Gerbers.zip` to your preferred fab (JLCPCB, PCBWay, OSHPark, etc.).
 
 **Board settings:**
 - Layers: **4**
