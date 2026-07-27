@@ -17,6 +17,7 @@ All-5V design using 1M×8 SRAM chips and an ATF1502ASL CPLD. Works with both the
 | Bank indicator | none | 4 green latching LEDs (one per bank) |
 | Ghost RAM protection | none | 10 KΩ pull-downs on SD0–SD15 |
 | Population jumper | SIZE jumper (JP1) | none — sequential by design |
+| DTACK output | bodge wire to CPLD pad | J3 header (pin 1 = /DTACK, pin 2 = /EXT_DTACK) |
 | SRAM count | 8× AS6C8008 | 8× AS6C8008 (same chips) |
 
 ---
@@ -46,6 +47,7 @@ All-5V design using 1M×8 SRAM chips and an ATF1502ASL CPLD. Works with both the
 | U10, U11 | 2 | 74HC245 | SOIC-20 **wide** | SN74HC245**DW** — verify wide (7.5 mm) body |
 | J2 | 1 | RAM connector | Samtec BCS-125-F-D-HE | 50-pin socket, horizontal entry |
 | J1 | 1 | JTAG header | 1×6 2.54 mm pin header | GND/VCC/TDO/TDI/TMS/TCK left-to-right |
+| J3 | 1 | PDS DTACK header | 1×2 2.54 mm pin header | Pin 1 = /DTACK → PDS B7, Pin 2 = /EXT_DTACK → PDS B30 |
 | JP1 | 1 | MODEL jumper | 1×2 2.54 mm pin header + shunt | OPEN = M5120 / CLOSED = M5126 |
 | D1–D4 | 4 | Green LED | 0603 | Latch ON at boot when each bank is confirmed by the CPLD |
 | R1–R4 | 4 | 330 Ω | 0402 | Series resistors for D1–D4 |
@@ -140,7 +142,8 @@ Solder in this order:
 9. **D1–D4** (green 0603 LEDs — observe polarity)
 10. **JP1** (1×2 header — add shunt for M5126, leave open for M5120)
 11. **J1** (1×6 JTAG header)
-12. **J2** (Samtec connector) — last
+12. **J3** (1×2 PDS DTACK header — on board edge)
+13. **J2** (Samtec connector) — last
 
 ---
 
@@ -184,11 +187,25 @@ See [firmware/BUILD.md](firmware/BUILD.md) for the full build and programming pi
 
 With a full build (all 8 SRAMs), you should see **9 MB** in About This Macintosh (M5120) or **7 MB** (M5126). All four green LEDs D1–D4 will be lit.
 
-### Known bring-up note — speed after sleep
+### DTACK Performance Fix — J3 header
 
-The memory region above 4 MB defaults to slow DTACK mode after the CPU wakes from sleep, until the motherboard register at `$FC0200` is read. This is a Mac Portable hardware quirk, not a card bug. In normal use (no sleep) the card runs at full speed.
+The Mac Portable's GLU chip generates /DTACK for the 68000 but inserts an extra wait state for expansion RAM above 4 MB, slowing the 8 MB card to ~51% on Snooper vs the 1 MB card's 87%. Worse, after sleep/wake the GLU loses its fast-DTACK state for that region entirely, collapsing to ~22%.
 
-A small INIT (`PortableDTACK`) that reads `$FC0200` on every wake is under development and is expected to permanently fix this. **Not yet tested on real hardware — use at your own risk.**
+The fix is built into v3: the CPLD asserts /DTACK directly via **J3 pin 1**, bypassing the GLU. Connect a wire from J3 pin 1 to **PDS slot pin B7** (/DTACK) on the Mac Portable motherboard. The CPLD monitors the address bus and data strobes, and whenever a cycle falls within the card's window (0x100000–0x8FFFFF) it pulls /DTACK low — purely combinatorial, so it's immune to sleep/wake state loss.
+
+J3 pin 2 (/EXT_DTACK → PDS B30) is an optional second output for experimentation.
+
+**Validated on v2 hardware (July 2026):**
+
+| Configuration | Speedometer | Snooper | Post-sleep |
+|---|---|---|---|
+| 1 MB card (baseline) | 1.990 | 87% | 1.985 |
+| 8 MB card — no DTACK fix | 1.486 | 51% | 0.974 / 22% |
+| **8 MB card + CPLD DTACK** | **2.170** | **102%** | **2.170** |
+
+The CPLD's combinatorial DTACK is faster than the GLU — the card with the fix outperforms the 1 MB baseline. Post-sleep collapse is fully eliminated.
+
+The PDS connector is the 96-pin DIN-41612 on the Mac Portable motherboard (3 rows A/B/C, 32 pins each). Pin B7 is in row B, position 7 from the component side.
 
 ---
 
@@ -203,7 +220,7 @@ Open-source 4MB RAM card used as a cross-reference for connector pinout, bus tra
 
 **Reza Fouladian — PortableRAM BGA 8MB**
 [https://github.com/rezafouladian/PortableRAM-BGA-8MB](https://github.com/rezafouladian/PortableRAM-BGA-8MB)
-BGA-format 8MB card using the ATF1502ASV (3.3V CPLD) and SN74LVC4245A level translators. Reference for the 8MB address decode strategy and CPLD pin planning.
+BGA-format 8MB card using the ATF1502ASV (3.3V CPLD) and SN74LVC4245A level translators. Reference for the 8MB address decode strategy and CPLD pin planning. Reza also provided direct guidance on driving /DTACK from the CPLD and on the Mac Portable PDS connector pinout — specifically confirming that /DTACK is available on PDS pin B7 and can be driven directly from a CPLD output. This insight is the basis for the J3 DTACK header on v3 and the validated bodge fix on v2.
 
 **Apple Mac Portable Developer Notes & Schematics**
 Apple's original hardware documentation for the Mac Portable expansion bus, memory map, and GLU register behaviour (including the $FC0200 DTACK register).
