@@ -1,7 +1,7 @@
 #!/bin/sh
 # Program an ATF1502AS via a Tigard (FT2232H) JTAG adapter using OpenOCD.
 #
-#   Usage:  ./program.sh PortableRAM8.svf
+#   Usage:  ./program.sh PortableRAM8_v3.svf
 #
 # Prereqs:
 #   brew install open-ocd
@@ -10,7 +10,7 @@
 #
 # Device facts (from the generated SVF): ATF1502AS, IR length 10, IDCODE 0x0150203f.
 set -e
-SVF="${1:-PortableRAM8.svf}"
+SVF="${1:-PortableRAM8_v3.svf}"
 openocd -f interface/ftdi/tigard.cfg \
   -c "transport select jtag; adapter speed 200; reset_config none" \
   -c "jtag newtap atf1502 tap -irlen 10 -expected-id 0x0150203f" \

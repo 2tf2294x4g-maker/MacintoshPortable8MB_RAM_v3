@@ -104,10 +104,10 @@ Library.pretty/               — Additional footprints
 Gerbers/                      — Gerber + drill files (ready to order)
 Gerbers.zip                   — Same, zipped (upload directly to fab)
 firmware/
-  PortableRAM8.pld            — CUPL source (ATF1502ASL logic)
-  PortableRAM8.jed            — Compiled JEDEC fusemap
-  PortableRAM8.svf            — SVF for OpenOCD programming
-  PortableRAM8.fit            — WinCUPL fit report
+  PortableRAM8_v3.pld            — CUPL source (ATF1502ASL logic)
+  PortableRAM8_v3.jed            — Compiled JEDEC fusemap
+  PortableRAM8_v3.svf            — SVF for OpenOCD programming
+  PortableRAM8_v3.fit            — WinCUPL fit report
   program.sh                  — One-command programming script (Tigard)
   BUILD.md                    — Firmware build instructions (WinCUPL + Wine)
 PortableRAM-8MB-BOM.csv
@@ -168,7 +168,7 @@ Set the Tigard voltage jumper to **5V** before connecting.
 
 ```bash
 cd firmware
-./program.sh PortableRAM8.svf
+./program.sh PortableRAM8_v3.svf
 ```
 
 Success output ends with `shutdown command invoked` and no TDO mismatch errors.
@@ -222,7 +222,7 @@ The PDS connector is the 96-pin DIN-41612 on the Mac Portable motherboard (3 row
 ## References & Acknowledgements
 
 **Dynamic Engineering Mac Portable RAM Card**
-The address decode and bus control logic in `PortableRAM8.pld` is derived from GAL22V10 PLD source files originally written for the Dynamic Engineering commercial RAM expansion card. These files define the core signal equations — bank chip-select generation, byte-lane write control via UDS*/LDS*, bus transceiver direction, and output enable timing. The original `.PLD` files were recovered and shared by *techknight* on the TinkerDifferent forum and #skunkworks Discord. Translated here from three GAL22V10 chips to a single ATF1502ASL CPLD, with corrections to the `r_w_u` equation and address decode base, and extended for 8MB capacity and M5126 compatibility.
+The address decode and bus control logic in `PortableRAM8_v3.pld` is derived from GAL22V10 PLD source files originally written for the Dynamic Engineering commercial RAM expansion card. These files define the core signal equations — bank chip-select generation, byte-lane write control via UDS*/LDS*, bus transceiver direction, and output enable timing. The original `.PLD` files were recovered and shared by *techknight* on the TinkerDifferent forum and #skunkworks Discord. Translated here from three GAL22V10 chips to a single ATF1502ASL CPLD, with corrections to the `r_w_u` equation and address decode base, and extended for 8MB capacity and M5126 compatibility.
 
 **miejas — Macintosh Portable 4MB Memory Expansion**
 [https://github.com/miejas/Macintosh-Portable-4-MB-Memory-Expansion](https://github.com/miejas/Macintosh-Portable-4-MB-Memory-Expansion)
@@ -239,4 +239,4 @@ Apple's original hardware documentation for the Mac Portable expansion bus, memo
 
 ## License
 
-Hardware released under [CERN-OHL-S v2](https://ohwr.org/cern_ohl_s_v2.txt). Firmware source (`PortableRAM8.pld`) released under MIT.
+Hardware released under [CERN-OHL-S v2](https://ohwr.org/cern_ohl_s_v2.txt). Firmware source (`PortableRAM8_v3.pld`) released under MIT.
