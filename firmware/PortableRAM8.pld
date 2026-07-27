@@ -1,7 +1,7 @@
 Name     PortableRAM8 ;
 PartNo   ATF1502ASL-25AU44 ;
-Date     2026-07-16 ;
-Revision 01 ;
+Date     2026-07-26 ;
+Revision 02 ;
 Designer G. Campbell ;
 Company  - ;
 Assembly Mac Portable 8MB RAM Card v3.0 ;
@@ -28,8 +28,12 @@ Device   f1502isptqfp44 ;
  * 2/6/11 are wired to pulled-up nets (/AS, /DELAY_CS, /SLEEP) that the
  * connector does not drive; declared here for documentation but UNUSED.
  *
- * DTACK: NOT driven by this card - the Portable's CPU GLU / RFSHCNTL
- * generates DTACK for expansion accesses (verified 050-0219).
+ * DTACK: driven by this card via pins 23 (/DTACK) and 24 (/EXT_DTACK).
+ * Both are routed to J3 (1x2 2.54mm header on the board edge). User connects
+ * a wire from J3 pin 1 to PDS slot pin B7 (/DTACK) to bypass the GLU entirely.
+ * J3 pin 2 (EXT_DTACK -> PDS B30) is optional. Both outputs are tristated when
+ * not our cycle (DTACK.OE = active) to avoid contention with GLU on the shared
+ * /DTACK line. Logic is purely combinatorial - immune to sleep/wake state loss.
  *
  * WE is split per byte lane: pin 28 (/WE) -> low byte U2-U5 (gated LDS),
  * pin 30 (/WEH) -> high byte U6-U9 (gated UDS). A common WE would corrupt
@@ -82,6 +86,8 @@ PIN 25 = DIR      ; /* '245 direction (see DIR equation) */
 PIN 27 = !DOE     ; /* '245 output enable, both transceivers */
 PIN 28 = !WEL     ; /* write enable, LOW byte chips U2-U5  */
 PIN 30 = !WEH     ; /* write enable, HIGH byte chips U6-U9 */
+PIN 23 = !DTACK   ; /* -> J3 pin 1 -> PDS B7: drive /DTACK to 68000, bypass GLU */
+PIN 24 = !EXT_DTACK ; /* -> J3 pin 2 -> PDS B30: optional second DTACK output */
 PIN 33 = BANKSEL  ; /* bank-half select -> SRAM A19 (pin 18, all chips) */
 
 /* ---------- registered LED outputs (latch on first bank access at boot) -- */
@@ -128,6 +134,15 @@ DIR = !RW ;                                /* A-side=bus, B-side=SRAM:
 DOE = active ;                             /* transceivers on during our access */
 
 BANKSEL = !A20 ;                           /* odd pages = low half of bank */
+
+/* ---------- DTACK equations -- */
+/* Tristate when not our cycle; assert when address falls in our window      */
+/* and a data strobe is active. Purely combinatorial - no state to lose on   */
+/* sleep/wake.                                                                */
+EXT_DTACK.OE = active ;
+EXT_DTACK    = active ;
+DTACK.OE     = active ;
+DTACK        = active ;
 
 /* ---------- LED latch equations (registered macrocell, D=1, CK=access) -- */
 /* Power-on clears all flip-flops. First bus access to each bank clocks      */
