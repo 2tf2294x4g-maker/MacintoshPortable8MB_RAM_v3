@@ -1966,7 +1966,7 @@
 		(at 156.5 130 -90)
 		(descr "Through hole straight pin header, 1x06, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x06 2.54mm single row")
-		(property "Reference" "J1"
+		(property "Reference" "J2"
 			(at -3 6.35 0)
 			(layer "F.SilkS")
 			(uuid "2ea4bb83-e255-4979-a898-dd55e5416986")
@@ -5040,7 +5040,7 @@
 		(at 126 143.5 180)
 		(descr "Samtec BCS-125-F-D-HE, 2x25 2.54mm through-hole connector")
 		(tags "connector samtec BCS 50pin 2x25 2.54mm through-hole")
-		(property "Reference" "J2"
+		(property "Reference" "J1"
 			(at 7 7.5 0)
 			(layer "F.SilkS")
 			(uuid "25b079d3-b3d4-4420-b5e6-893b573ac4a8")

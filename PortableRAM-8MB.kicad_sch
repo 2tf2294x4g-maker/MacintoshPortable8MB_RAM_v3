@@ -23087,7 +23087,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d9fe4a3e-ed8a-4508-b983-33952b046156")
-		(property "Reference" "J1"
+		(property "Reference" "J2"
 			(at 98.425 154.94 0)
 			(effects
 				(font
@@ -23151,7 +23151,7 @@
 		(instances
 			(project "PortableRAM-8MB"
 				(path "/3f227e15-b881-4174-9819-781940a19688"
-					(reference "J1")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -23167,7 +23167,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "daffc7b9-1caf-4cf8-9a25-7be35e947ab5")
-		(property "Reference" "J2"
+		(property "Reference" "J1"
 			(at 209.55 222.25 0)
 			(effects
 				(font
@@ -23363,7 +23363,7 @@
 		(instances
 			(project "PortableRAM-8MB"
 				(path "/3f227e15-b881-4174-9819-781940a19688"
-					(reference "J2")
+					(reference "J1")
 					(unit 1)
 				)
 			)

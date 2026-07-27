@@ -45,8 +45,8 @@ All-5V design using 1M×8 SRAM chips and an ATF1502ASL CPLD. Works with both the
 | U1–U8 | 8 | AS6C8008-55ZIN | TSOP-II-44 | Alliance Memory — 1M×8 5V SRAM 55 ns. Order spares. |
 | U9 | 1 | ATF1502ASL | TQFP-44 | Microchip ATF1502ASL-**25AU44** — must be **ASL** (5V), not ASV |
 | U10, U11 | 2 | 74HC245 | SOIC-20 **wide** | SN74HC245**DW** — verify wide (7.5 mm) body |
-| J2 | 1 | RAM connector | Samtec BCS-125-F-D-HE | 50-pin socket, horizontal entry |
-| J1 | 1 | JTAG header | 1×6 2.54 mm pin header | GND/VCC/TDO/TDI/TMS/TCK left-to-right |
+| J1 | 1 | RAM connector | Samtec BCS-125-F-D-HE | 50-pin socket, horizontal entry |
+| J2 | 1 | JTAG header | 1×6 2.54 mm pin header | GND/VCC/TDO/TDI/TMS/TCK left-to-right |
 | J3 | 1 | PDS DTACK header | 1×2 2.54 mm pin header | Pin 1 = /DTACK → PDS B7, Pin 2 = /EXT_DTACK → PDS B30 |
 | JP1 | 1 | MODEL jumper | 1×2 2.54 mm pin header + shunt | OPEN = M5120 / CLOSED = M5126 |
 | D1–D4 | 4 | Green LED | 0603 | Latch ON at boot when each bank is confirmed by the CPLD |
@@ -141,17 +141,17 @@ Solder in this order:
 8. **C15–C19** (10 µF 0805 bulk caps)
 9. **D1–D4** (green 0603 LEDs — observe polarity)
 10. **JP1** (1×2 header — add shunt for M5126, leave open for M5120)
-11. **J1** (1×6 JTAG header)
+11. **J2** (1×6 JTAG header)
 12. **J3** (1×2 PDS DTACK header — on board edge)
-13. **J2** (Samtec connector) — last
+13. **J1** (Samtec connector) — last
 
 ---
 
 ## Programming the CPLD
 
-The ATF1502ASL must be programmed before the card will work. Use J1 (1×6 header on the board edge).
+The ATF1502ASL must be programmed before the card will work. Use J2 (1×6 header on the board edge).
 
-### J1 pinout (left to right, component side)
+### J2 pinout (left to right, component side)
 
 | Pin | Signal |
 |-----|--------|
@@ -182,7 +182,7 @@ See [firmware/BUILD.md](firmware/BUILD.md) for the full build and programming pi
 1. Power off and unplug the Mac Portable.
 2. Remove the battery and bottom cover.
 3. Set JP1 (MODEL jumper) for your machine — open for M5120, closed for M5126.
-4. Seat the card on the RAM expansion header — J2 is a friction-fit horizontal-entry socket.
+4. Seat the card on the RAM expansion header — J1 is a friction-fit horizontal-entry socket.
 5. Reassemble and power on.
 
 With a full build (all 8 SRAMs), you should see **9 MB** in About This Macintosh (M5120) or **7 MB** (M5126). All four green LEDs D1–D4 will be lit.

@@ -1,9 +1,10 @@
 Ref,Qty,Value,Package,Manufacturer,Mfr Part Number,Notes
 U1-U8,8,AS6C8008-55ZIN,TSOP-II-44 (10.16x18.41mm P0.8mm),Alliance Memory,AS6C8008-55ZIN,1Mx8 SRAM 5V 55ns (Z=TSOP-II pkg); ~$13-15 each; order 1-2 spares; populate sequentially: U1+U5=2MB U2+U6=4MB U3+U7=6MB U4+U8=8MB
-U9,1,ATF1502ASL,TQFP-44 (10x10mm P0.8mm),Microchip,ATF1502ASL-25AU44,5V CPLD (ASL = 5V; do NOT order ASV which is 3.3V); program via J1 JTAG header; order a spare
+U9,1,ATF1502ASL,TQFP-44 (10x10mm P0.8mm),Microchip,ATF1502ASL-25AU44,5V CPLD (ASL = 5V; do NOT order ASV which is 3.3V); program via J2 JTAG header; order a spare
 U10 U11,2,74HC245,SOIC-20W (7.5mm wide),TI/Nexperia,SN74HC245DW,Octal bus transceiver 5V; verify WIDE SOIC-20 body (DW/DWR suffix)
-J2,1,RAM Connector,Samtec BCS-125-F-D-HE,Samtec,BCS-125-F-D-HE,50-pin 2x25 2.54mm socket strip; footprint verified vs drawing
-J1,1,JTAG Header 1x06,PinHeader 2.54mm 1x06 vertical,Generic,,GND/VCC/TDO/TDI/TMS/TCK left-to-right; labeled on silkscreen; for Tigard programmer
+J1,1,RAM Connector,Samtec BCS-125-F-D-HE,Samtec,BCS-125-F-D-HE,50-pin 2x25 2.54mm socket strip; footprint verified vs drawing
+J2,1,JTAG Header 1x06,PinHeader 2.54mm 1x06 vertical,Generic,,GND/VCC/TDO/TDI/TMS/TCK left-to-right; labeled on silkscreen; for Tigard programmer
+J3,1,PDS DTACK header 1x02,PinHeader 2.54mm 1x02 vertical,Generic,,Pin 1 = /DTACK -> PDS B7; Pin 2 = /EXT_DTACK -> PDS B30 (optional)
 JP1,1,MODEL jumper 1x02,PinHeader 2.54mm 1x02 vertical,Generic,,OPEN=M5120 non-backlit (9MB total) / CLOSED=M5126 backlit (7MB total). Add one 2.54mm shunt.
 D1-D4,4,GREEN LED,LED_0603 (1608 metric),Generic,,Green indicator LEDs; latch ON when Mac boot probe confirms each bank; board top edge
 R1-R4,4,330,R_0402 (1005 metric),Generic,,Series resistors for D1-D4 LEDs; 330 ohm 1% 1/16W
