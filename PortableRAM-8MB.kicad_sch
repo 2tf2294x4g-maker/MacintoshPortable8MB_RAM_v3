@@ -1371,6 +1371,169 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector:Conn_01x02_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_Pin_1_1"
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_02x25_Odd_Even"
 			(pin_names
 				(offset 1.016)
@@ -5181,6 +5344,19 @@
 		)
 		(uuid "ba27441e-a533-481d-8642-3c95d11602ac")
 	)
+	(text "DTACK Header for PDS Wire"
+		(exclude_from_sim no)
+		(at 179.07 161.29 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "c2c9cead-65d3-4041-89ff-03f56d5f1ac3")
+	)
 	(text "ERC power anchors — +5V / GND arrive via J1\n(PWR_FLAGs tell ERC these rails are driven)"
 		(exclude_from_sim no)
 		(at 19.05 60.96 0)
@@ -5203,10 +5379,6 @@
 		(uuid "13338423-9418-4e62-a8c5-c2a7a47e71c5")
 	)
 	(no_connect
-		(at 220.98 95.25)
-		(uuid "407f5d7b-e239-484e-b634-64130fbf50ce")
-	)
-	(no_connect
 		(at 220.98 80.01)
 		(uuid "49fe3921-0308-4af2-8126-276ff4cfe8fb")
 	)
@@ -5217,10 +5389,6 @@
 	(no_connect
 		(at 220.98 77.47)
 		(uuid "8c158cd1-8038-451b-8f8f-5d7156aa5772")
-	)
-	(no_connect
-		(at 220.98 110.49)
-		(uuid "a4899f47-cbf1-43bb-9270-d6033dd45166")
 	)
 	(no_connect
 		(at 203.2 261.62)
@@ -9094,6 +9262,16 @@
 		)
 		(uuid "3bd0f3d5-1b9d-407d-9375-07a399ad8086")
 	)
+	(label "DTACK_OUT"
+		(at 220.98 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3bd42c9e-97c5-40ea-962d-b0c2f95355c7")
+	)
 	(label "TCK"
 		(at 92.71 162.56 0)
 		(effects
@@ -10404,6 +10582,16 @@
 		)
 		(uuid "95a39e77-b159-419c-9138-bc9f5832aa81")
 	)
+	(label "EXT_DTACK_OUT"
+		(at 220.98 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "95d143f1-2f25-438f-b646-e6a5e39b1ca3")
+	)
 	(label "SLEEP"
 		(at 177.8 87.63 0)
 		(effects
@@ -11464,6 +11652,16 @@
 		)
 		(uuid "d420f75c-b8ff-422a-97fd-73f3a3deaa8a")
 	)
+	(label "EXT_DTACK_OUT"
+		(at 208.28 173.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d54400fa-e6a7-4274-b032-52c0c75b963d")
+	)
 	(label "SD14"
 		(at 369.57 205.74 0)
 		(effects
@@ -11543,6 +11741,16 @@
 			(justify left bottom)
 		)
 		(uuid "d9d1c0aa-f543-4957-ab8f-7d82f70c714f")
+	)
+	(label "DTACK_OUT"
+		(at 208.28 171.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d9d9510d-4ab8-4afc-8f46-b8c09c9e3fb3")
 	)
 	(label "D7"
 		(at 222.25 276.86 0)
@@ -19724,6 +19932,74 @@
 			(project "PortableRAM-8MB"
 				(path "/3f227e15-b881-4174-9819-781940a19688"
 					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 203.2 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a3b18f16-66b3-4eb8-af84-d2898b6ecfe3")
+		(property "Reference" "J3"
+			(at 203.835 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PDS Header 1x2"
+			(at 203.835 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 203.2 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 203.2 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 203.2 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "76361f74-de79-4707-80e2-b5b31ff73c64")
+		)
+		(pin "2"
+			(uuid "f9c3fcf4-bd0c-4787-bcb3-bf55eb70d004")
+		)
+		(instances
+			(project "PortableRAM-8MB"
+				(path "/3f227e15-b881-4174-9819-781940a19688"
+					(reference "J3")
 					(unit 1)
 				)
 			)
