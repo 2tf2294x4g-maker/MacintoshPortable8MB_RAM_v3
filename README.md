@@ -189,9 +189,17 @@ With a full build (all 8 SRAMs), you should see **9 MB** in About This Macintosh
 
 ### DTACK Performance Fix — J3 header
 
-The Mac Portable's GLU chip generates /DTACK for the 68000 but inserts an extra wait state for expansion RAM above 4 MB, slowing the 8 MB card to ~51% on Snooper vs the 1 MB card's 87%. Worse, after sleep/wake the GLU loses its fast-DTACK state for that region entirely, collapsing to ~22%.
+The Mac Portable's GLU chip generates /DTACK for the 68000 with region-dependent timing:
 
-The fix is built into v3: the CPLD asserts /DTACK directly via **J3 pin 1**, bypassing the GLU. Connect a wire from J3 pin 1 to **PDS slot pin B7** (/DTACK) on the Mac Portable motherboard. The CPLD monitors the address bus and data strobes, and whenever a cycle falls within the card's window (0x100000–0x8FFFFF) it pulls /DTACK low — purely combinatorial, so it's immune to sleep/wake state loss.
+| Address range | GLU /DTACK | Condition |
+|---|---|---|
+| 0x000000–0x4FFFFF | 2 clocks | Always — hardwired fast path |
+| 0x500000–0x8FFFFF | 6 clocks | Normal operation (register configured) |
+| 0x500000–0x8FFFFF | 18 clocks | After sleep/wake (register reset) |
+
+The 8 MB card spans 0x100000–0x8FFFFF, straddling the split. Banks 0–1 (0x100000–0x4FFFFF) already get the GLU's 2-clock fast path. Banks 2–3 (0x500000–0x8FFFFF) run at 6 clocks and collapse to 18 clocks after sleep/wake when the GLU's DTACK register loses its configuration.
+
+The fix is built into v3: the CPLD asserts /DTACK directly via **J3 pin 1**, bypassing the GLU for all card accesses. Connect a wire from J3 pin 1 to **PDS slot pin B7** (/DTACK) on the Mac Portable motherboard. The CPLD's path is purely combinatorial — faster than even the GLU's 2-clock mode — and immune to sleep/wake state loss.
 
 J3 pin 2 (/EXT_DTACK → PDS B30) is an optional second output for experimentation.
 
@@ -203,7 +211,7 @@ J3 pin 2 (/EXT_DTACK → PDS B30) is an optional second output for experimentati
 | 8 MB card — no DTACK fix | 1.486 | 51% | 0.974 / 22% |
 | **8 MB card + CPLD DTACK** | **2.170** | **102%** | **2.170** |
 
-The CPLD's combinatorial DTACK is faster than the GLU — the card with the fix outperforms the 1 MB baseline. Post-sleep collapse is fully eliminated.
+The CPLD outperforms the GLU's fastest mode (102% vs 87% baseline) because its combinatorial propagation delay is well under one bus clock. Post-sleep collapse is fully eliminated. The fix also has no effect on a 4 MB configuration since all banks fall in the GLU's 2-clock region and do not suffer the post-sleep collapse.
 
 The PDS connector is the 96-pin DIN-41612 on the Mac Portable motherboard (3 rows A/B/C, 32 pins each). Pin B7 is in row B, position 7 from the component side.
 
