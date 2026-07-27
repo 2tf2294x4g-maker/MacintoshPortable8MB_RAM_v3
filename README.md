@@ -215,6 +215,8 @@ The CPLD outperforms the GLU's fastest mode (102% vs 87% baseline) because its c
 
 The PDS connector is the 96-pin DIN-41612 on the Mac Portable motherboard (3 rows A/B/C, 32 pins each). Pin B7 is in row B, position 7 from the component side.
 
+![PDS slot and RAM connector locations, with /DTACK (B7) marked](images/pds-slot-dtack-location.png)
+
 ---
 
 ## References & Acknowledgements
