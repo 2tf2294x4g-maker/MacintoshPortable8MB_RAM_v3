@@ -210,8 +210,9 @@ J3 pin 2 (/EXT_DTACK → PDS B30) is an optional second output for experimentati
 | 1 MB card (baseline) | 1.990 | 87% | 1.985 |
 | 8 MB card — no DTACK fix | 1.486 | 51% | 0.974 / 22% |
 | **8 MB card + CPLD DTACK** | **2.170** | **102%** | **2.170** |
+| **4 MB card + CPLD DTACK** | **2.170** | **102%** | **2.170** |
 
-The CPLD outperforms the GLU's fastest mode (102% vs 87% baseline) because its combinatorial propagation delay is well under one bus clock. Post-sleep collapse is fully eliminated. The fix also has no effect on a 4 MB configuration since all banks fall in the GLU's 2-clock region and do not suffer the post-sleep collapse.
+The CPLD outperforms the GLU's fastest mode (102% vs 87% baseline) because its combinatorial propagation delay is well under one bus clock. Post-sleep collapse is fully eliminated. The 4 MB result confirms the CPLD path is faster than even the GLU's hardwired 2-clock mode — the fix benefits all bank configurations, not just the upper 8 MB range.
 
 The PDS connector is the 96-pin DIN-41612 on the Mac Portable motherboard (3 rows A/B/C, 32 pins each). Pin B7 is in row B, position 7 from the component side.
 
